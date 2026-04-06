@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "AndroidCoroutineFlow"
 include(":app")
+include(":kotlin")
