@@ -1,6 +1,8 @@
 package com.androidcoroutineflow.Lesson2
 
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.*
+
 
 object UsersRepository {
 
@@ -11,8 +13,12 @@ object UsersRepository {
         users.add(user)
     }
 
-    suspend fun loadUsers(): List<String> {
-        delay(10)
-        return users.toList()
+    suspend fun loadUsers(): Flow<List<String>> {
+        return flow {
+            while (true) {
+                emit(users.toList())
+                delay(2000)
+            }
+        }
     }
 }
