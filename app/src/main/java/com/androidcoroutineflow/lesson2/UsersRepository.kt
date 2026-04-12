@@ -1,4 +1,4 @@
-package com.androidcoroutineflow.Lesson2
+package com.androidcoroutineflow.lesson2
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*

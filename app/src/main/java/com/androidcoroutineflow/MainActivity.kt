@@ -2,7 +2,7 @@ package com.sumin.coroutineflow
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.androidcoroutineflow.Lesson2.UsersActivity
+import com.androidcoroutineflow.lesson2.UsersActivity
 import com.androidcoroutineflow.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
