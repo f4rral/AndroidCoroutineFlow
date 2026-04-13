@@ -12,6 +12,8 @@ object CryptoRepository {
 
     fun getCurrencyList(): Flow<List<Currency>> {
         return flow {
+            emit(currencyList.toList())
+
             while (true) {
                 delay(200) // Имитация задержки при получении данных
                 generateCurrencyList()

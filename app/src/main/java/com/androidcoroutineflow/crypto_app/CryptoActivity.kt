@@ -49,6 +49,18 @@ class CryptoActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.loadData()
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        viewModel.stopLoading()
+    }
+
     companion object {
 
         fun newIntent(context: Context) = Intent(context, CryptoActivity::class.java)
