@@ -15,13 +15,7 @@ class CryptoViewModel : ViewModel() {
 
     private val repository = CryptoRepository
 
-    init {
-        viewModelScope.launch {
-            repository.loadData()
-        }
-    }
-
-    val state: Flow<State> = repository.currencyListFlow
+    val state: Flow<State> = repository.getCurrencyList()
         .filter {
             it.isNotEmpty()
         }
@@ -34,7 +28,7 @@ class CryptoViewModel : ViewModel() {
 
     fun refreshList() {
         viewModelScope.launch {
-            repository.loadData()
+            repository.refreshList()
         }
     }
 }
