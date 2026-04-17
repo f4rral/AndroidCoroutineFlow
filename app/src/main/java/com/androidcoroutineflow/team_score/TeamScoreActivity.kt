@@ -10,8 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.androidcoroutineflow.databinding.ActivityTeamScoreBinding
-import com.sumin.coroutineflow.team_score.Team
-import com.sumin.coroutineflow.team_score.TeamScoreState
 import kotlinx.coroutines.launch
 
 class TeamScoreActivity : AppCompatActivity() {

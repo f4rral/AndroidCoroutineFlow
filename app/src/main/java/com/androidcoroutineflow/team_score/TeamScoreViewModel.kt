@@ -1,8 +1,6 @@
 package com.androidcoroutineflow.team_score
 
 import androidx.lifecycle.ViewModel
-import com.sumin.coroutineflow.team_score.Team
-import com.sumin.coroutineflow.team_score.TeamScoreState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 

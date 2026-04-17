@@ -1,4 +1,4 @@
-package com.sumin.coroutineflow.team_score
+package com.androidcoroutineflow.team_score
 
 sealed class TeamScoreState {
 
