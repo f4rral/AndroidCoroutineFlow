@@ -1,58 +1,45 @@
 package com.androidcoroutineflow.team_score
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.sumin.coroutineflow.team_score.Team
 import com.sumin.coroutineflow.team_score.TeamScoreState
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class TeamScoreViewModel : ViewModel() {
-    private var cachedState: TeamScoreState = TeamScoreState.Game(0, 0)
-
-    private val _state = MutableSharedFlow<TeamScoreState>(replay = 1)
-    val state = _state.asSharedFlow()
-        .onEach {
-            cachedState = it
-        }
+    private val _state = MutableStateFlow<TeamScoreState>(TeamScoreState.Game(0, 0))
+    val state = _state.asStateFlow()
 
     fun increaseScore(team: Team) {
-        viewModelScope.launch {
-            val currentState = cachedState
+        val currentState = _state.value
 
-            if (currentState is TeamScoreState.Game) {
-                if (team == Team.TEAM_1) {
-                    val oldValue = currentState.score1
-                    val newValue = oldValue + 1
+        if (currentState is TeamScoreState.Game) {
+            if (team == Team.TEAM_1) {
+                val oldValue = currentState.score1
+                val newValue = oldValue + 1
 
-                    _state.emit(currentState.copy(score1 = newValue))
+                _state.value = currentState.copy(score1 = newValue)
 
-                    if (newValue >= WINNER_SCORE) {
-                        _state.emit(
-                            TeamScoreState.Winner(
-                                winnerTeam = Team.TEAM_1,
-                                newValue,
-                                currentState.score2
-                            )
-                        )
-                    }
-                } else {
-                    val oldValue = currentState.score2
-                    val newValue = oldValue + 1
+                if (newValue >= WINNER_SCORE) {
+                    _state.value = TeamScoreState.Winner(
+                        winnerTeam = Team.TEAM_1,
+                        newValue,
+                        currentState.score2
+                    )
+                }
+            } else {
+                val oldValue = currentState.score2
+                val newValue = oldValue + 1
 
-                    _state.emit(currentState.copy(score2 = newValue))
+                _state.value = currentState.copy(score2 = newValue)
 
-                    if (newValue >= WINNER_SCORE) {
-                        _state.emit(
-                            TeamScoreState.Winner(
-                                winnerTeam = Team.TEAM_2,
-                                currentState.score1,
-                                newValue
-                            )
-                        )
-                    }
+                if (newValue >= WINNER_SCORE) {
+                    _state.value = TeamScoreState.Winner(
+                        winnerTeam = Team.TEAM_2,
+                        currentState.score1,
+                        newValue
+                    )
+
                 }
             }
         }
