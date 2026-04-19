@@ -44,7 +44,10 @@ class CryptoActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
+        viewModel.toString()
+
         lifecycleScope.launch {
+            delay(5000)
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.state
                     .collect {
@@ -62,6 +65,21 @@ class CryptoActivity : AppCompatActivity() {
                                 binding.buttonRefreshList.isEnabled = true
                                 adapter.submitList(it.currencyList)
                             }
+                        }
+                    }
+            }
+        }
+
+        lifecycleScope.launch {
+            delay(5000)
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.state
+                    .collect {
+                        when (it) {
+                            is State.Content -> {
+                                Log.d("CurrencyList", it.currencyList.joinToString())
+                            }
+                            else -> {}
                         }
                     }
             }
