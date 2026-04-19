@@ -8,12 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.androidcoroutineflow.databinding.ActivityCryptoBinding
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.launch
 
 class CryptoActivity : AppCompatActivity() {
@@ -44,10 +42,9 @@ class CryptoActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        viewModel.toString()
-
         lifecycleScope.launch {
-            delay(5000)
+//            delay(5000)
+
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.state
                     .collect {
@@ -73,7 +70,7 @@ class CryptoActivity : AppCompatActivity() {
         lifecycleScope.launch {
             delay(5000)
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                viewModel.state
+                viewModel.state2
                     .collect {
                         when (it) {
                             is State.Content -> {
